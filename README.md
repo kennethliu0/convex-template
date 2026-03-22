@@ -1,75 +1,73 @@
-# React + TypeScript + Vite
+# Convex + React + Vite + Clerk + shadcn/ui Template
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack template with [Convex](https://convex.dev) as the backend, [Clerk](https://clerk.com) for authentication, [shadcn/ui](https://ui.shadcn.com) components, and [Tailwind CSS v4](https://tailwindcss.com) — all wired together in a [Vite](https://vite.dev) + React + TypeScript project with [React Router](https://reactrouter.com) for client-side routing.
 
-Currently, two official plugins are available:
+## Getting Started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Clone the repo and install dependencies:
 
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Copy the example env file and fill in your values:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cp .env.example .env.local
 ```
+
+3. Set the `CLERK_JWT_ISSUER_DOMAIN` environment variable on your Convex deployment:
+
+```bash
+npx convex env set CLERK_JWT_ISSUER_DOMAIN https://your-clerk-domain.clerk.accounts.dev
+```
+
+4. Start the Convex dev server and Vite dev server:
+
+```bash
+npx convex dev
+pnpm dev
+```
+
+## Project Structure
+
+```
+src/
+├── main.tsx            # App entry — providers (Clerk, Convex, Router) and route definitions
+├── Layout.tsx          # Shared layout with nav header and auth controls
+├── routes/
+│   ├── Home.tsx        # Landing page (/)
+│   └── Dashboard.tsx   # Protected route (/dashboard)
+├── components/ui/      # shadcn/ui components
+├── lib/utils.ts        # Utility helpers (cn)
+└── index.css           # Tailwind v4 + shadcn theme
+convex/
+├── auth.config.ts      # Clerk JWT auth provider config
+└── _generated/         # Auto-generated Convex types and API
+```
+
+## Adding Routes
+
+Create a new file in `src/routes/` and add a `<Route>` entry in `src/main.tsx`:
+
+```tsx
+<Route path="my-page" element={<MyPage />} />
+```
+
+## Adding shadcn/ui Components
+
+```bash
+npx shadcn@latest add <component-name>
+```
+
+Components are installed to `src/components/ui/`.
+
+## Stack
+
+- **React 19** with React Compiler enabled
+- **Vite 8** for dev/build tooling
+- **React Router** for client-side routing
+- **Convex** for the real-time backend (database, serverless functions)
+- **Clerk** for authentication (integrated with Convex via `ConvexProviderWithClerk`)
+- **shadcn/ui** for UI components
+- **Tailwind CSS v4** for utility-first styling
