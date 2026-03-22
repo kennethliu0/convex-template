@@ -1,4 +1,4 @@
-# Convex + React + Vite + Clerk + shadcn/ui Template
+# Convex + React Template
 
 A full-stack template with [Convex](https://convex.dev) as the backend, [Clerk](https://clerk.com) for authentication, [shadcn/ui](https://ui.shadcn.com) components, and [Tailwind CSS v4](https://tailwindcss.com) — all wired together in a [Vite](https://vite.dev) + React + TypeScript project with [React Router](https://reactrouter.com) for client-side routing.
 
