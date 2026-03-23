@@ -38,3 +38,4 @@ This is a quick-prototyping template using:
 - Use `SignInButton`, `UserButton` from `@clerk/react` for auth controls
 - Environment variables for the client must be prefixed with `VITE_` (see `.env.example`)
 - Convex backend env vars are set via `npx convex env set`
+- After finishing a set of changes, run `pnpm lint` and fix any errors before considering the work done
