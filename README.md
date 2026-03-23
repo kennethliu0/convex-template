@@ -36,9 +36,12 @@ src/
 ├── main.tsx            # App entry — providers (Clerk, Convex, Router) and route definitions
 ├── Layout.tsx          # Shared layout with nav header and auth controls
 ├── routes/
-│   ├── Home.tsx        # Landing page (/)
-│   └── Dashboard.tsx   # Protected route (/dashboard)
-├── components/ui/      # shadcn/ui components
+│   ├── home/
+│   │   └── Home.tsx    # Landing page (/)
+│   └── dashboard/
+│       └── Dashboard.tsx  # Protected route (/dashboard)
+├── components/         # Shared components used across routes
+│   └── ui/             # shadcn/ui components
 ├── lib/utils.ts        # Utility helpers (cn)
 └── index.css           # Tailwind v4 + shadcn theme
 convex/
@@ -48,10 +51,19 @@ convex/
 
 ## Adding Routes
 
-Create a new file in `src/routes/` and add a `<Route>` entry in `src/main.tsx`:
+Create a new folder in `src/routes/` with a page component and add a `<Route>` entry in `src/main.tsx`:
 
 ```tsx
 <Route path="my-page" element={<MyPage />} />
+```
+
+Extract sub-components into the same route folder to keep route files focused on layout and composition:
+
+```
+src/routes/my-page/
+├── MyPage.tsx          # Route component (registered in main.tsx)
+├── SomeSection.tsx     # Extracted sub-component
+└── SomeCard.tsx        # Extracted sub-component
 ```
 
 ## Adding shadcn/ui Components
@@ -71,3 +83,5 @@ Components are installed to `src/components/ui/`.
 - **Clerk** for authentication (integrated with Convex via `ConvexProviderWithClerk`)
 - **shadcn/ui** for UI components
 - **Tailwind CSS v4** for utility-first styling
+- **Prettier** with Tailwind class sorting
+- **[React Grab](https://github.com/aidenybai/react-grab)** for copying component context into AI coding agents
