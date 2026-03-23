@@ -20,15 +20,19 @@ This is a quick-prototyping template using:
 
 - `src/main.tsx` — app entry point, all providers (Clerk → Convex → Router) and route definitions
 - `src/Layout.tsx` — shared layout with nav and auth controls (sign in / user button)
-- `src/routes/` — page components, one per route
+- `src/routes/` — route folders, one per route (e.g. `src/routes/dashboard/`)
 - `convex/auth.config.ts` — Clerk JWT issuer config for Convex auth
 - `src/components/ui/` — shadcn/ui components (install more via `npx shadcn@latest add <name>`)
+- `src/components/` — shared components used across multiple routes
 - `src/lib/utils.ts` — `cn()` helper for class merging
 - `src/index.css` — Tailwind v4 imports and shadcn theme variables
 
 ## Conventions
 
-- Add new routes as files in `src/routes/` and register them as `<Route>` entries in `src/main.tsx`
+- Each route is a folder under `src/routes/` (e.g. `src/routes/dashboard/Dashboard.tsx`). Register the main component as a `<Route>` in `src/main.tsx`
+- Extract non-trivial sub-components from route files into the same route folder (e.g. `src/routes/dashboard/StatsCard.tsx`). Route files should be thin — primarily composing extracted components
+- Components shared across multiple routes go in `src/components/`
+- Keep route files focused on layout and composition, not implementation details
 - Use `@/` path alias for imports (e.g. `import { cn } from "@/lib/utils"`)
 - Use `Authenticated`, `Unauthenticated`, `AuthLoading` from `convex/react` for auth-gated UI
 - Use `SignInButton`, `UserButton` from `@clerk/react` for auth controls

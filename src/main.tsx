@@ -5,8 +5,8 @@ import { ClerkProvider, useAuth } from "@clerk/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { ConvexReactClient } from "convex/react";
 import Layout from "./Layout.tsx";
-import Home from "./routes/Home.tsx";
-import Dashboard from "./routes/Dashboard.tsx";
+import Home from "./routes/home/Home.tsx";
+import Dashboard from "./routes/dashboard/Dashboard.tsx";
 import "./index.css";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
